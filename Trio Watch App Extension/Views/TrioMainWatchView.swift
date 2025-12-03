@@ -112,7 +112,7 @@ struct TrioMainWatchView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     VStack {
-                        Image(systemName: "syringe.fill")
+                        Image(systemName: "cross.vial.fill")
                             .foregroundStyle(Color.insulin)
 
                         Text(isWatchStateDated || isSessionUnreachable ? "--" : state.iob ?? "--")
