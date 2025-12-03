@@ -461,7 +461,7 @@ extension Home {
         @ViewBuilder func mealPanel(_: GeometryProxy) -> some View {
             HStack {
                 HStack {
-                    Image(systemName: "syringe.fill")
+                    Image(systemName: "cross.vial.fill")
                         .font(.callout)
                         .foregroundColor(Color.insulin)
                     Text(
