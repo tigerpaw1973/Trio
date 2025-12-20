@@ -60,7 +60,7 @@ struct CarbsInputView: View {
                     from: 0,
                     through: effectiveCarbsLimit,
                     by: 10,
-                    sensitivity: .high,
+                    sensitivity: .medium,
                     isContinuous: false,
                     isHapticFeedbackEnabled: true
                 )
