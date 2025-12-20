@@ -56,7 +56,7 @@ struct CarbsInputView: View {
                         $carbsAmount,
                         from: 0,
                         through: effectiveCarbsLimit,
-                        by: 1,
+                        by: 10,
                         sensitivity: .medium,
                         isContinuous: false,
                         isHapticFeedbackEnabled: true
