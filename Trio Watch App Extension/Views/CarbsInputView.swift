@@ -45,22 +45,29 @@ struct CarbsInputView: View {
 
                 Spacer()
 
-                // Display the current carb amount
-                Text(String(format: "%.0f \(String(localized: "g", comment: "gram of carbs"))", carbsAmount))
-                    .fontWeight(.bold)
-                    .font(.system(.title2, design: .rounded))
-                    .foregroundColor(carbsAmount > 0.0 && carbsAmount >= effectiveCarbsLimit ? .loopRed : .primary)
-                    .focusable(true)
-                    .focused($isCrownFocused)
-                    .digitalCrownRotation(
-                        $carbsAmount,
-                        from: 0,
-                        through: effectiveCarbsLimit,
-                        by: 10,
-                        sensitivity: .medium,
-                        isContinuous: false,
-                        isHapticFeedbackEnabled: true
-                    )
+                Text(
+                    String(format: "%.0f \(String(localized: "g", comment: "gram of carbs"))", carbsAmount)
+                )
+                .fontWeight(.bold)
+                .font(.system(.title2, design: .rounded))
+                .foregroundColor(
+                    carbsAmount > 0 && carbsAmount >= effectiveCarbsLimit ? .loopRed : .primary
+                )
+                .focusable(true)
+                .focused($isCrownFocused)
+                .digitalCrownRotation(
+                    $carbsAmount,
+                    from: 0,
+                    through: effectiveCarbsLimit,
+                    by: 10,
+                    sensitivity: .low,
+                    isContinuous: false,
+                    isHapticFeedbackEnabled: true
+                )
+                .onChange(of: carbsAmount) { newValue in
+                    carbsAmount = round(newValue / 10) * 10
+                }
+
 
                 Spacer()
 
