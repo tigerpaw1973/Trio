@@ -33,7 +33,7 @@ struct CarbsInputView: View {
                 // "-" Button
                 Button(action: {
                     if carbsAmount > 0 {
-                        carbsAmount < 5 ? carbsAmount = 0 : (carbsAmount -= 5)
+                        carbsAmount < 5 ? carbsAmount = 0 : (carbsAmount -= 10)
                     }
                 }) {
                     Image(systemName: "minus.circle.fill")
@@ -60,7 +60,7 @@ struct CarbsInputView: View {
                     from: 0,
                     through: effectiveCarbsLimit,
                     by: 10,
-                    sensitivity: .medium,
+                    sensitivity: .high,
                     isContinuous: false,
                     isHapticFeedbackEnabled: true
                 )
