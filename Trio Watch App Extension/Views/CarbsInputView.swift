@@ -5,7 +5,7 @@ import SwiftUI
 
 struct CarbsInputView: View {
     @Binding var navigationPath: NavigationPath
-    @State private var carbsAmount: Double = 0.0 // Needs to be Double due to .digitalCrownRotation() stride
+    @State private var carbsAmount: Double = 50.0 // Needs to be Double due to .digitalCrownRotation() stride
     @FocusState private var isCrownFocused: Bool // Manage crown focus
 
     let state: WatchState
@@ -33,7 +33,7 @@ struct CarbsInputView: View {
                 // "-" Button
                 Button(action: {
                     if carbsAmount > 0 {
-                        carbsAmount < 5 ? carbsAmount = 0 : (carbsAmount -= 5)
+                        carbsAmount < 5 ? carbsAmount = 0 : (carbsAmount -= 10)
                     }
                 }) {
                     Image(systemName: "minus.circle.fill")
@@ -45,22 +45,29 @@ struct CarbsInputView: View {
 
                 Spacer()
 
-                // Display the current carb amount
-                Text(String(format: "%.0f \(String(localized: "g", comment: "gram of carbs"))", carbsAmount))
-                    .fontWeight(.bold)
-                    .font(.system(.title2, design: .rounded))
-                    .foregroundColor(carbsAmount > 0.0 && carbsAmount >= effectiveCarbsLimit ? .loopRed : .primary)
-                    .focusable(true)
-                    .focused($isCrownFocused)
-                    .digitalCrownRotation(
-                        $carbsAmount,
-                        from: 0,
-                        through: effectiveCarbsLimit,
-                        by: 1,
-                        sensitivity: .medium,
-                        isContinuous: false,
-                        isHapticFeedbackEnabled: true
-                    )
+                Text(
+                    String(format: "%.0f \(String(localized: "g", comment: "gram of carbs"))", carbsAmount)
+                )
+                .fontWeight(.bold)
+                .font(.system(.title2, design: .rounded))
+                .foregroundColor(
+                    carbsAmount > 0 && carbsAmount >= effectiveCarbsLimit ? .loopRed : .primary
+                )
+                .focusable(true)
+                .focused($isCrownFocused)
+                .digitalCrownRotation(
+                    $carbsAmount,
+                    from: 0,
+                    through: effectiveCarbsLimit,
+                    by: 10,
+                    sensitivity: .high,
+                    isContinuous: false,
+                    isHapticFeedbackEnabled: true
+                )
+                .onChange(of: carbsAmount) { newValue in
+                    carbsAmount = round(newValue / 10) * 10
+                }
+
 
                 Spacer()
 
