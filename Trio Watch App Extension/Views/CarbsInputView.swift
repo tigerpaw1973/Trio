@@ -54,9 +54,9 @@ struct CarbsInputView: View {
                     .focused($isCrownFocused)
                     .digitalCrownRotation(
                         $carbsAmount,
-                        from: 0,
+                        from: 50,
                         through: effectiveCarbsLimit,
-                        by: 1,
+                        by: 5,
                         sensitivity: .medium,
                         isContinuous: false,
                         isHapticFeedbackEnabled: true
